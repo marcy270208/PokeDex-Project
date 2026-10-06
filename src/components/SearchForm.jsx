@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { playUiSound } from "../sounds.js";
 
 function SearchForm() {
   const [query, setQuery] = useState("");
@@ -12,11 +13,13 @@ function SearchForm() {
     const name = query.trim().toLowerCase();
 
     if (name === "") {
+      playUiSound("error");
       setError("Type a Pokémon name first.");
       return;
     }
 
     setError(null);
+    playUiSound("search");
     navigate(`/pokemon/${name}`);
   }
 
